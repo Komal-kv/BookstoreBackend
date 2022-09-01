@@ -1067,7 +1067,8 @@
           "CommonLayer": "1.0.0",
           "Experimental.System.Messaging": "1.1.0",
           "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
-          "System.Data.SqlClient": "4.8.3"
+          "System.Data.SqlClient": "4.8.3",
+          "System.IdentityModel.Tokens.Jwt": "5.5.0"
         },
         "runtime": {
           "RepositoryLayer.dll": {}

@@ -44,6 +44,8 @@ namespace Bookstore.Controllers
                     return this.Ok(new { success = true, message = "LogIn Successfull", data = user });
                 }
                 return this.BadRequest(new { success = false, message = "LogIn Failed", data = user });
+
+                
             }
             catch(Exception e)
             {
@@ -80,7 +82,7 @@ namespace Bookstore.Controllers
                 var password = this.userBL.UserResetPassword(userPassword, Email);
                 if (password != null)
                 {
-                    return this.Ok(new { success = true, message = "Reset Password has been Successfull", data = password });
+                    return this.Ok(new { success = true, message = "Reset Password has been Successfull" });
                 }
                 return this.BadRequest(new { success = false, message = "Reset Password failed" });
 
