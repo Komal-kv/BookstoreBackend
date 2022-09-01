@@ -5,6 +5,8 @@ using System;
 
 namespace Bookstore.Controllers
 {
+    [Route("[controller]")]
+    [ApiController]
     public class UserController : ControllerBase
     {
         private readonly IUserBL userBL;
