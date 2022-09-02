@@ -33,7 +33,7 @@ namespace RepositoryLayer.Services
                     LoginModel model = new LoginModel();
                     var encryptedPassword = EncryptPassword(login.Password);
 
-                    cmd.Parameters.AddWithValue("@Email", login.Email);
+                    cmd.Parameters.AddWithValue("@EmailId", login.Email);
                     cmd.Parameters.AddWithValue("@Password", encryptedPassword);
 
                     con.Open();
@@ -51,7 +51,7 @@ namespace RepositoryLayer.Services
                         {
 
 
-                            model.Email = Convert.ToString(sdr["Email"]);
+                            model.Email = Convert.ToString(sdr["EmailId"]);
                             encryptedPassword = Convert.ToString(sdr["Password"]);
                             UserId = Convert.ToInt32(sdr["UserId"]);
 
@@ -88,7 +88,7 @@ namespace RepositoryLayer.Services
                     SqlCommand cmd = new SqlCommand("spUserForgetPasswrd", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@Email", Email);
+                    cmd.Parameters.AddWithValue("@EmailId", Email);
 
                     con.Open();
                     var result = cmd.ExecuteNonQuery();
@@ -98,7 +98,7 @@ namespace RepositoryLayer.Services
                         int UserId = 0;
                         while (rdr.Read())
                         {
-                            Email = Convert.ToString(rdr["Email"]);
+                            Email = Convert.ToString(rdr["EmailId"]);
                             UserId = Convert.ToInt32(rdr["UserId"]);
                         }
 
@@ -143,7 +143,7 @@ namespace RepositoryLayer.Services
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@FullName", userPost.FullName);
-                    cmd.Parameters.AddWithValue("@Email", userPost.Email);
+                    cmd.Parameters.AddWithValue("@EmailId", userPost.Email);
                     cmd.Parameters.AddWithValue("@Password", userPost.Password);
                     cmd.Parameters.AddWithValue("@MobileNumber", userPost.MobileNumber);
 
@@ -224,7 +224,7 @@ namespace RepositoryLayer.Services
                         SqlCommand cmd = new SqlCommand("spUserResetPaswrd", con);
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@Email", Email);
+                        cmd.Parameters.AddWithValue("@EmailId", Email);
                         cmd.Parameters.AddWithValue("@Password", EncryptPassword(userPassword.Password));
 
                         con.Open();
@@ -310,7 +310,7 @@ namespace RepositoryLayer.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("Email", email)
+                    new Claim("EmailId", email)
                 }),
                 Expires = DateTime.UtcNow.AddHours(24),
                 SigningCredentials =

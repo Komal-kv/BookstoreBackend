@@ -27,7 +27,7 @@ namespace RepositoryLayer.Services
                     SqlCommand cmd = new SqlCommand("SpAddWishList", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@BookId ", wish.bookId);
+                    cmd.Parameters.AddWithValue("@BookId ", wish.BookId);
                     cmd.Parameters.AddWithValue("@UserId ", UserId);
 
                     con.Open();
@@ -84,10 +84,11 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public List<ViewWishList> GetWishList(int UserId)
+        public List<WishListModel> GetWishList(int UserId)
         {
             try
             {
+                List<WishListModel> cart = new List<WishListModel>();
                 using (SqlConnection con = new SqlConnection(configuration["ConnectionStrings:BookStore"]))
                 {
                     SqlCommand cmd = new SqlCommand("SpGetWishList", con);
@@ -101,24 +102,24 @@ namespace RepositoryLayer.Services
 
                     if (reader.HasRows)
                     {
-                        List<ViewWishList> cart = new List<ViewWishList>();
-                        WishListModel model = new WishListModel();
-
+                        
 
                         while (reader.Read())
                         {
+                            WishListModel model = new WishListModel();
                             BookUpdateModel bookModel = new BookUpdateModel();
+
                             bookModel.BookId = Convert.ToInt32(reader["BookId"]);
                             bookModel.BookName = reader["BookName"].ToString();
                             bookModel.AuthorName = reader["AuthorName"].ToString();
                             bookModel.DiscountPrice = reader["DiscountPrice"].ToString();
                             bookModel.ActualPrice = reader["ActualPrice"].ToString();
                             bookModel.BookImage = reader["BookImage"].ToString();
-                            model.WishlistId = Convert.ToInt32(reader["WishListId"]);
-                            model.bookId = Convert.ToInt32(reader["BookId"]);
-                            model.userId = Convert.ToInt32(reader["UserId"]);
+                            model.WishListId = Convert.ToInt32(reader["WishListId"]);
+                            model.BookId = Convert.ToInt32(reader["BookId"]);
+                            model.UserId = Convert.ToInt32(reader["UserId"]);
 
-                            //cart.Add(model);
+                            cart.Add(model);
                         }
                         con.Close();
                         return cart;

@@ -52,7 +52,7 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public List<CartPostModel> GetAllCart(int UserId)
+        public List<CartPostModel> GetAllCart()
         {
             try
             {

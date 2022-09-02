@@ -9,6 +9,6 @@ namespace BusinessLayer.Interfaces
     {
         public WishListModel AddWishList(WishListModel wish, int UserId);
         public string DeleteWishList(int WishListId, int UserId);
-        public List<ViewWishList> GetWishList(int UserId);
+        public List<WishListModel> GetWishList(int UserId);
     }
 }

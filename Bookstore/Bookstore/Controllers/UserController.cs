@@ -25,7 +25,7 @@ namespace Bookstore.Controllers
                 {
                     return this.Ok(new { success = true, message = "Registration Successfull", data = user });
                 }
-                return this.BadRequest(new { success = false, message = "Email Already Exits", data = user });
+                return this.BadRequest(new { success = false, message = "EmailId Already Exits", data = user });
 
             }
             catch(Exception e)

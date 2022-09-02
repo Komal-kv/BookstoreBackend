@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interfaces;
 using CommonLayer.WishList;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Bookstore.Controllers
             this.wishBL = wishBL;
         }
 
+        [Authorize(Roles = Role.User)]
         [HttpPost("AddWishList")]
         public ActionResult AddWishList(WishListModel wishList)
         {
@@ -39,6 +41,7 @@ namespace Bookstore.Controllers
             }
         }
 
+        [Authorize(Roles = Role.User)]
         [HttpDelete("DeleteWishList")]
         public ActionResult RemoveWishList(int WishListId)
         {
@@ -62,6 +65,7 @@ namespace Bookstore.Controllers
             }
         }
 
+        [Authorize(Roles = Role.User)]
         [HttpGet("GetWishList")]
         public ActionResult GetWishList()
         {

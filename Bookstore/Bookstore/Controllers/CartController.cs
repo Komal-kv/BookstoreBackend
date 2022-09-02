@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interfaces;
 using CommonLayer.CartModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Bookstore.Controllers
             this.cartBL = cartBL;
         }
 
+        [Authorize(Roles = Role.User)]
         [HttpPost("AddToCart")]
         public ActionResult AddtoCart(CartModel cart, int UserId)
         {
@@ -36,6 +38,7 @@ namespace Bookstore.Controllers
             }
         }
 
+        [Authorize(Roles = Role.User)]
         [HttpPut("UpdateCart")]
         public ActionResult updateCart(int cartId, CartModel cart, int UserId)
         {
@@ -57,15 +60,16 @@ namespace Bookstore.Controllers
             }
         }
 
+        [Authorize(Roles = Role.User)]
         [HttpGet("GetAllBookInCart")]
-        public ActionResult GetAllBookInCart(int UserId)
+        public ActionResult GetAllBookInCart()
         {
             try
             {
-                //var currentUser = HttpContext.User;
-                //int userId = Convert.ToInt32(currentUser.Claims.FirstOrDefault(c => c.Type == "UserId").Value);
-              
-                var res = this.cartBL.GetAllCart(UserId);
+                var currentUser = HttpContext.User;
+                int userId = Convert.ToInt32(currentUser.Claims.FirstOrDefault(c => c.Type == "UserId").Value);
+
+                var res = this.cartBL.GetAllCart();
 
                 if (res != null)
                 {
@@ -80,6 +84,7 @@ namespace Bookstore.Controllers
             }
         }
 
+        [Authorize(Roles = Role.User)]
         [HttpDelete("DeleteCartItem")]
         public ActionResult RemoveCart(int cartId)
         {

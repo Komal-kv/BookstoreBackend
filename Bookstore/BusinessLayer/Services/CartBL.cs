@@ -28,11 +28,11 @@ namespace BusinessLayer.Services
             }
         }
 
-        public List<CartPostModel> GetAllCart(int UserId)
+        public List<CartPostModel> GetAllCart()
         {
             try
             {
-                return this.cartRL.GetAllCart(UserId);
+                return this.cartRL.GetAllCart();
             }
             catch(Exception ex)
             {

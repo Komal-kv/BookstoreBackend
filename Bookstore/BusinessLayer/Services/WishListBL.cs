@@ -41,7 +41,7 @@ namespace BusinessLayer.Services
             }
         }
 
-        public List<ViewWishList> GetWishList(int UserId)
+        public List<WishListModel> GetWishList(int UserId)
         {
             try
             {
